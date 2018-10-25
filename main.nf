@@ -35,23 +35,28 @@ params.rg = fastq1.baseName
 
 process get_reference {
 	publishDir "${params.outdir}/reference"
-	container 'oliversi/hg19'
+	container 'melnel000/hg38_resources'
 	
 	output:
-	file "ucsc.hg19.fasta" into reference
-	file "ucsc.hg19.dict" into reference_dict
-	file "ucsc.hg19.fasta.fai" into reference_fai
+	file "GCA_000001405.15_GRCh38_no_alt_analysis_set.fasta" into reference
+	file "GCA_000001405.15_GRCh38_no_alt_analysis_set.fasta.dict" into reference_dict
+	file "GCA_000001405.15_GRCh38_no_alt_analysis_set.fasta.fai" into reference_fai
 	
 	"""
-	gunzip -dc /data/ucsc.hg19.fasta.gz > ucsc.hg19.fasta
-	gunzip -dc /data/ucsc.hg19.dict.gz > ucsc.hg19.dict
-	gunzip -dc /data/ucsc.hg19.fasta.fai.gz > ucsc.hg19.fasta.fai
+	gunzip -dc /data/GCA_000001405.15_GRCh38_no_alt_analysis_set.fna.gz > GCA_000001405.15_GRCh38_no_alt_analysis_set.fasta
+	gunzip -dc /data/GCA_000001405.15_GRCh38_no_alt_analysis_set.fna.amb.gz > GCA_000001405.15_GRCh38_no_alt_analysis_set.fasta.amb
+	gunzip -dc /data/GCA_000001405.15_GRCh38_no_alt_analysis_set.fna.ann.gz > GCA_000001405.15_GRCh38_no_alt_analysis_set.fasta.ann
+	gunzip -dc /data/GCA_000001405.15_GRCh38_no_alt_analysis_set.fna.bwt.gz > GCA_000001405.15_GRCh38_no_alt_analysis_set.fasta.bwt
+	gunzip -dc /data/GCA_000001405.15_GRCh38_no_alt_analysis_set.fna.dict.gz > GCA_000001405.15_GRCh38_no_alt_analysis_set.fasta.dict
+	gunzip -dc /data/GCA_000001405.15_GRCh38_no_alt_analysis_set.fna.fai.gz > GCA_000001405.15_GRCh38_no_alt_analysis_set.fasta.fai
+	gunzip -dc /data/GCA_000001405.15_GRCh38_no_alt_analysis_set.fna.pac.gz > GCA_000001405.15_GRCh38_no_alt_analysis_set.fasta.pac
+	gunzip -dc /data/GCA_000001405.15_GRCh38_no_alt_analysis_set.fna.sa.gz > GCA_000001405.15_GRCh38_no_alt_analysis_set.fasta.sa
 	"""
 }
 
 process get_dbSNP {
 	publishDir "${params.outdir}/reference"
-	container 'oliversi/hg19'
+	container 'melnel000/hg38_resources'
 
 	output:
 	file "dbsnp_138.hg19.vcf" into dbsnp
