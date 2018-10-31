@@ -42,9 +42,9 @@ process set_reference {
 	file "GCA_000001405.15_GRCh38_no_alt_analysis_set.fasta.fai" into reference_fai
 	
 	"""
-	gunzip -dc /hg38_ref/GCA_000001405.15_GRCh38_no_alt_analysis_set.fna.gz > GCA_000001405.15_GRCh38_no_alt_analysis_set.fasta
-	gunzip -dc /hg38_ref/GCA_000001405.15_GRCh38_no_alt_analysis_set.fna.dict.gz > GCA_000001405.15_GRCh38_no_alt_analysis_set.fasta.dict
-	gunzip -dc /hg38_ref/GCA_000001405.15_GRCh38_no_alt_analysis_set.fna.fai.gz > GCA_000001405.15_GRCh38_no_alt_analysis_set.fasta.fai
+	gunzip -dc ./hg38_ref/GCA_000001405.15_GRCh38_no_alt_analysis_set.fna.gz > GCA_000001405.15_GRCh38_no_alt_analysis_set.fasta
+	gunzip -dc ./hg38_ref/GCA_000001405.15_GRCh38_no_alt_analysis_set.fna.dict.gz > GCA_000001405.15_GRCh38_no_alt_analysis_set.fasta.dict
+	gunzip -dc ./hg38_ref/GCA_000001405.15_GRCh38_no_alt_analysis_set.fna.fai.gz > GCA_000001405.15_GRCh38_no_alt_analysis_set.fasta.fai
 	"""
 }
 
@@ -56,8 +56,8 @@ process get_dbSNP {
 	file "Homo_sapiens_assembly38.dbsnp138.vcf.tbi" into dbsnp_idx
 
 	"""
-	gunzip -dc /hg38_ref/Homo_sapiens_assembly38.dbsnp138.vcf.gz > Homo_sapiens_assembly38.dbsnp138.vcf
-	gunzip -dc /hg38_ref/Homo_sapiens_assembly38.dbsnp138.vcf.tbi.gz > Homo_sapiens_assembly38.dbsnp138.vcf.tbi
+	gunzip -dc ./hg38_ref/Homo_sapiens_assembly38.dbsnp138.vcf.gz > Homo_sapiens_assembly38.dbsnp138.vcf
+	gunzip -dc ./hg38_ref/Homo_sapiens_assembly38.dbsnp138.vcf.tbi.gz > Homo_sapiens_assembly38.dbsnp138.vcf.tbi
 	"""
 }
 
@@ -69,8 +69,8 @@ process get_golden_indel {
 	file "Mills_and_1000G_gold_standard.indels.hg38.vcf.tbi" into golden_indel_idx
 
 	"""
-	gunzip -dc /hg38_ref/Mills_and_1000G_gold_standard.indels.hg38.vcf.gz > Mills_and_1000G_gold_standard.indels.hg38.vcf.gz
-	gunzip -dc /hg38_ref/Mills_and_1000G_gold_standard.indels.hg38.vcf.tbi.gz > Mills_and_1000G_gold_standard.indels.hg38.vcf.tbi
+	gunzip -dc ./hg38_ref/Mills_and_1000G_gold_standard.indels.hg38.vcf.gz > Mills_and_1000G_gold_standard.indels.hg38.vcf.gz
+	gunzip -dc ./hg38_ref/Mills_and_1000G_gold_standard.indels.hg38.vcf.tbi.gz > Mills_and_1000G_gold_standard.indels.hg38.vcf.tbi
 	"""
 }
 
@@ -82,8 +82,8 @@ process get_hapmap {
 	file "hapmap_3.3.hg38.vcf.tbi" into hapmap_idx
 
 	"""
-	gunzip -dc /hg38_ref/hapmap_3.3.hg38.vcf.gz > hapmap_3.3.hg38.vcf
-	gunzip -dc /hg38_ref/hapmap_3.3.hg38.vcf.tbi.gz > hapmap_3.3.hg38.vcf.tbi
+	gunzip -dc ./hg38_ref/hapmap_3.3.hg38.vcf.gz > hapmap_3.3.hg38.vcf
+	gunzip -dc ./hg38_ref/hapmap_3.3.hg38.vcf.tbi.gz > hapmap_3.3.hg38.vcf.tbi
 	"""
 }
 
@@ -95,8 +95,8 @@ process get_omni {
 	file "1000G_omni2.5.hg38.vcf.tbi" into omni_idx
 
 	"""
-	gunzip -dc /hg38_ref/1000G_omni2.5.hg38.vcf.gz > 1000G_omni2.5.hg38.vcf.gz
-	gunzip -dc /hg38_ref/1000G_omni2.5.hg38.vcf.tbi.gz > 1000G_omni2.5.hg38.vcf.tbi
+	gunzip -dc ./hg38_ref/1000G_omni2.5.hg38.vcf.gz > 1000G_omni2.5.hg38.vcf.gz
+	gunzip -dc ./hg38_ref/1000G_omni2.5.hg38.vcf.tbi.gz > 1000G_omni2.5.hg38.vcf.tbi
 	"""
 }
 
@@ -108,8 +108,8 @@ process get_phase1_SNPs {
 	file "1000G_phase1.snps.high_confidence.hg38.vcf.tbi" into phase1_snps_idx
 
 	"""
-	gunzip -dc /hg38_ref/1000G_phase1.snps.high_confidence.hg38.vcf.gz > 1000G_phase1.snps.high_confidence.hg38.vcf
-	gunzip -dc /hg38_ref/1000G_phase1.snps.high_confidence.hg38.vcf.tbi.gz > 1000G_phase1.snps.high_confidence.hg38.vcf.tbi
+	gunzip -dc ./hg38_ref/1000G_phase1.snps.high_confidence.hg38.vcf.gz > 1000G_phase1.snps.high_confidence.hg38.vcf
+	gunzip -dc ./hg38_ref/1000G_phase1.snps.high_confidence.hg38.vcf.tbi.gz > 1000G_phase1.snps.high_confidence.hg38.vcf.tbi
 	"""
 }
 
@@ -120,11 +120,11 @@ process get_BWA_index {
 	set "GCA_000001405.15_GRCh38_no_alt_analysis_set.fasta.amb", "GCA_000001405.15_GRCh38_no_alt_analysis_set.fasta.ann", "GCA_000001405.15_GRCh38_no_alt_analysis_set.fasta.bwt", "GCA_000001405.15_GRCh38_no_alt_analysis_set.fasta.pac", "GCA_000001405.15_GRCh38_no_alt_analysis_set.fasta.sa" into bwa_index
 
 	"""
-	gunzip -dc /hg38_ref/GCA_000001405.15_GRCh38_no_alt_analysis_set.fna.amb.gz > GCA_000001405.15_GRCh38_no_alt_analysis_set.fasta.amb
-	gunzip -dc /hg38_ref/GCA_000001405.15_GRCh38_no_alt_analysis_set.fna.ann.gz > GCA_000001405.15_GRCh38_no_alt_analysis_set.fasta.ann
-	gunzip -dc /hg38_ref/GCA_000001405.15_GRCh38_no_alt_analysis_set.fna.bwt.gz > GCA_000001405.15_GRCh38_no_alt_analysis_set.fasta.bwt
-	gunzip -dc /hg38_ref/GCA_000001405.15_GRCh38_no_alt_analysis_set.fna.pac.gz > GCA_000001405.15_GRCh38_no_alt_analysis_set.fasta.pac
-	gunzip -dc /hg38_ref/GCA_000001405.15_GRCh38_no_alt_analysis_set.fna.sa.gz > GCA_000001405.15_GRCh38_no_alt_analysis_set.fasta.sa
+	gunzip -dc ./hg38_ref/GCA_000001405.15_GRCh38_no_alt_analysis_set.fna.amb.gz > GCA_000001405.15_GRCh38_no_alt_analysis_set.fasta.amb
+	gunzip -dc ./hg38_ref/GCA_000001405.15_GRCh38_no_alt_analysis_set.fna.ann.gz > GCA_000001405.15_GRCh38_no_alt_analysis_set.fasta.ann
+	gunzip -dc ./hg38_ref/GCA_000001405.15_GRCh38_no_alt_analysis_set.fna.bwt.gz > GCA_000001405.15_GRCh38_no_alt_analysis_set.fasta.bwt
+	gunzip -dc ./hg38_ref/GCA_000001405.15_GRCh38_no_alt_analysis_set.fna.pac.gz > GCA_000001405.15_GRCh38_no_alt_analysis_set.fasta.pac
+	gunzip -dc ./hg38_ref/GCA_000001405.15_GRCh38_no_alt_analysis_set.fna.sa.gz > GCA_000001405.15_GRCh38_no_alt_analysis_set.fasta.sa
 	"""
 }
 
