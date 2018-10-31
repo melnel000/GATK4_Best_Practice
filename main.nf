@@ -65,12 +65,12 @@ process get_golden_indel {
 	publishDir "${params.outdir}/reference"
 	
 	output:
-	file "Mills_and_1000G_gold_standard.indels.hg19.sites.vcf" into golden_indel
-	file "Mills_and_1000G_gold_standard.indels.hg19.sites.vcf.idx" into golden_indel_idx
+	file "Mills_and_1000G_gold_standard.indels.hg38.vcf.gz" into golden_indel
+	file "Mills_and_1000G_gold_standard.indels.hg38.vcf.tbi" into golden_indel_idx
 
 	"""
-	gunzip -dc /data/Mills_and_1000G_gold_standard.indels.hg19.sites.vcf.gz > Mills_and_1000G_gold_standard.indels.hg19.sites.vcf
-	gunzip -dc /data/Mills_and_1000G_gold_standard.indels.hg19.sites.vcf.idx.gz > Mills_and_1000G_gold_standard.indels.hg19.sites.vcf.idx
+	gunzip -dc /hg38_ref/Mills_and_1000G_gold_standard.indels.hg38.vcf.gz > Mills_and_1000G_gold_standard.indels.hg38.vcf.gz
+	gunzip -dc /hg38_ref/Mills_and_1000G_gold_standard.indels.hg38.vcf.tbi.gz > Mills_and_1000G_gold_standard.indels.hg38.vcf.tbi
 	"""
 }
 
@@ -78,12 +78,12 @@ process get_hapmap {
 	publishDir "${params.outdir}/reference"
 	
 	output:
-	file "hapmap_3.3.hg19.sites.vcf" into hapmap
-	file "hapmap_3.3.hg19.sites.vcf.idx" into hapmap_idx
+	file "hapmap_3.3.hg38.vcf" into hapmap
+	file "hapmap_3.3.hg38.vcf.tbi" into hapmap_idx
 
 	"""
-	gunzip -dc /data/hapmap_3.3.hg19.sites.vcf.gz > hapmap_3.3.hg19.sites.vcf
-	gunzip -dc /data/hapmap_3.3.hg19.sites.vcf.idx.gz > hapmap_3.3.hg19.sites.vcf.idx
+	gunzip -dc /hg38_ref/hapmap_3.3.hg38.vcf.gz > hapmap_3.3.hg38.vcf
+	gunzip -dc /hg38_ref/hapmap_3.3.hg38.vcf.tbi.gz > hapmap_3.3.hg38.vcf.tbi
 	"""
 }
 
@@ -91,12 +91,12 @@ process get_omni {
 	publishDir "${params.outdir}/reference"
 	
 	output:
-	file "1000G_omni2.5.hg19.sites.vcf" into omni
-	file "1000G_omni2.5.hg19.sites.vcf.idx" into omni_idx
+	file "1000G_omni2.5.hg38.vcf.tbi.gz" into omni
+	file "1000G_omni2.5.hg38.vcf.tbi" into omni_idx
 
 	"""
-	gunzip -dc /data/1000G_omni2.5.hg19.sites.vcf.gz > 1000G_omni2.5.hg19.sites.vcf
-	gunzip -dc /data/1000G_omni2.5.hg19.sites.vcf.idx.gz > 1000G_omni2.5.hg19.sites.vcf.idx
+	gunzip -dc /hg38_ref/1000G_omni2.5.hg38.vcf.gz > 1000G_omni2.5.hg38.vcf.gz
+	gunzip -dc /hg38_ref/1000G_omni2.5.hg38.vcf.tbi.gz > 1000G_omni2.5.hg38.vcf.tbi
 	"""
 }
 
@@ -104,12 +104,12 @@ process get_phase1_SNPs {
 	publishDir "${params.outdir}/reference"
 	
 	output:
-	file "1000G_phase1.snps.high_confidence.hg19.sites.vcf" into phase1_snps
-	file "1000G_phase1.snps.high_confidence.hg19.sites.vcf.idx" into phase1_snps_idx
+	file "1000G_phase1.snps.high_confidence.hg38.vcf" into phase1_snps
+	file "1000G_phase1.snps.high_confidence.hg38.vcf.tbi" into phase1_snps_idx
 
 	"""
-	gunzip -dc /data/1000G_phase1.snps.high_confidence.hg19.sites.vcf.gz > 1000G_phase1.snps.high_confidence.hg19.sites.vcf
-	gunzip -dc /data/1000G_phase1.snps.high_confidence.hg19.sites.vcf.idx.gz > 1000G_phase1.snps.high_confidence.hg19.sites.vcf.idx
+	gunzip -dc /hg38_ref/1000G_phase1.snps.high_confidence.hg38.vcf.gz > 1000G_phase1.snps.high_confidence.hg38.vcf
+	gunzip -dc /hg38_ref/1000G_phase1.snps.high_confidence.hg38.vcf.tbi.gz > 1000G_phase1.snps.high_confidence.hg38.vcf.tbi
 	"""
 }
 
@@ -117,7 +117,7 @@ process get_BWA_index {
 	publishDir "${params.outdir}/reference"
 	
 	output:
-	set "ucsc.hg19.fasta.amb", "ucsc.hg19.fasta.ann", "ucsc.hg19.fasta.bwt", "ucsc.hg19.fasta.pac", "ucsc.hg19.fasta.sa" into bwa_index
+	set "GCA_000001405.15_GRCh38_no_alt_analysis_set.fasta.amb", "GCA_000001405.15_GRCh38_no_alt_analysis_set.fasta.ann", "GCA_000001405.15_GRCh38_no_alt_analysis_set.fasta.bwt", "GCA_000001405.15_GRCh38_no_alt_analysis_set.fasta.pac", "GCA_000001405.15_GRCh38_no_alt_analysis_set.fasta.sa" into bwa_index
 
 	"""
 	gunzip -dc /hg38_ref/GCA_000001405.15_GRCh38_no_alt_analysis_set.fna.amb.gz > GCA_000001405.15_GRCh38_no_alt_analysis_set.fasta.amb
