@@ -1,5 +1,5 @@
-# GATK4 Best Practice Nextflow Pipeline
-**GATK4 Best Practice Nextflow Pipeline** is a variant calling pipeline for human whole genome sequencing based on the [GATK best practice](https://software.broadinstitute.org/gatk/best-practices/workflow).
+# GATK4 Best Practice Nextflow Pipeline for WGS
+**GATK4 Best Practice Nextflow Pipeline for WGS** is a variant calling pipeline for human whole genome sequencing based on the [GATK best practice](https://software.broadinstitute.org/gatk/best-practices/workflow).
 
 ## Requirements
 * <a href="https://www.nextflow.io/">NextFlow</a>
