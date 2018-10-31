@@ -37,15 +37,10 @@ process set_reference {
 	publishDir "${params.outdir}/reference"
 	
 	output:
-	file "GCA_000001405.15_GRCh38_no_alt_analysis_set.fasta" into reference
-	file "GCA_000001405.15_GRCh38_no_alt_analysis_set.fasta.dict" into reference_dict
-	file "GCA_000001405.15_GRCh38_no_alt_analysis_set.fasta.fai" into reference_fai
-	
-	"""
-	gunzip -dc ./hg38_ref/GCA_000001405.15_GRCh38_no_alt_analysis_set.fna.gz > GCA_000001405.15_GRCh38_no_alt_analysis_set.fasta
-	gunzip -dc ./hg38_ref/GCA_000001405.15_GRCh38_no_alt_analysis_set.fna.dict.gz > GCA_000001405.15_GRCh38_no_alt_analysis_set.fasta.dict
-	gunzip -dc ./hg38_ref/GCA_000001405.15_GRCh38_no_alt_analysis_set.fna.fai.gz > GCA_000001405.15_GRCh38_no_alt_analysis_set.fasta.fai
-	"""
+	file "./hg38_ref/GCA_000001405.15_GRCh38_no_alt_analysis_set.fasta" into reference
+	file "./hg38_ref/GCA_000001405.15_GRCh38_no_alt_analysis_set.fasta.dict" into reference_dict
+	file "./hg38_ref/GCA_000001405.15_GRCh38_no_alt_analysis_set.fasta.fai" into reference_fai
+
 }
 
 process get_dbSNP {
