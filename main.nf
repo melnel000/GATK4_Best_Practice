@@ -32,6 +32,7 @@ fastq2 = file("$params.fastq2")
 params.outdir = "./Results"
 params.samplename = fastq1.baseName
 params.rg = fastq1.baseName
+params.genome = 
 
 process set_reference {
 	publishDir "${params.outdir}/reference"
