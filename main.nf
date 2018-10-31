@@ -11,7 +11,7 @@ if (params.help) {
   log.info " "
   log.info "USAGE: "
   log.info " "
-  log.info "nextflow run oliverSI/GATK4_Best_Practice --fastq1 read_R1.fastq.gz --fastq2 read_R2.fastq.gz"
+  log.info "nextflow run melnel000/GATK4_Best_Practice --fastq1 read_R1.fastq.gz --fastq2 read_R2.fastq.gz"
   log.info " "
   log.info "Mandatory arguments:"
   log.info "    --fastq1        FILE               Fastq(.gz) file for read1"
@@ -33,9 +33,8 @@ params.outdir = "./Results"
 params.samplename = fastq1.baseName
 params.rg = fastq1.baseName
 
-process get_reference {
+process set_reference {
 	publishDir "${params.outdir}/reference"
-	container 'melnel000/hg38_resources'
 	
 	output:
 	file "GCA_000001405.15_GRCh38_no_alt_analysis_set.fasta" into reference
@@ -43,35 +42,28 @@ process get_reference {
 	file "GCA_000001405.15_GRCh38_no_alt_analysis_set.fasta.fai" into reference_fai
 	
 	"""
-	gunzip -dc /data/GCA_000001405.15_GRCh38_no_alt_analysis_set.fna.gz > GCA_000001405.15_GRCh38_no_alt_analysis_set.fasta
-	gunzip -dc /data/GCA_000001405.15_GRCh38_no_alt_analysis_set.fna.amb.gz > GCA_000001405.15_GRCh38_no_alt_analysis_set.fasta.amb
-	gunzip -dc /data/GCA_000001405.15_GRCh38_no_alt_analysis_set.fna.ann.gz > GCA_000001405.15_GRCh38_no_alt_analysis_set.fasta.ann
-	gunzip -dc /data/GCA_000001405.15_GRCh38_no_alt_analysis_set.fna.bwt.gz > GCA_000001405.15_GRCh38_no_alt_analysis_set.fasta.bwt
-	gunzip -dc /data/GCA_000001405.15_GRCh38_no_alt_analysis_set.fna.dict.gz > GCA_000001405.15_GRCh38_no_alt_analysis_set.fasta.dict
-	gunzip -dc /data/GCA_000001405.15_GRCh38_no_alt_analysis_set.fna.fai.gz > GCA_000001405.15_GRCh38_no_alt_analysis_set.fasta.fai
-	gunzip -dc /data/GCA_000001405.15_GRCh38_no_alt_analysis_set.fna.pac.gz > GCA_000001405.15_GRCh38_no_alt_analysis_set.fasta.pac
-	gunzip -dc /data/GCA_000001405.15_GRCh38_no_alt_analysis_set.fna.sa.gz > GCA_000001405.15_GRCh38_no_alt_analysis_set.fasta.sa
+	gunzip -dc /hg38_ref/GCA_000001405.15_GRCh38_no_alt_analysis_set.fna.gz > GCA_000001405.15_GRCh38_no_alt_analysis_set.fasta
+	gunzip -dc /hg38_ref/GCA_000001405.15_GRCh38_no_alt_analysis_set.fna.dict.gz > GCA_000001405.15_GRCh38_no_alt_analysis_set.fasta.dict
+	gunzip -dc /hg38_ref/GCA_000001405.15_GRCh38_no_alt_analysis_set.fna.fai.gz > GCA_000001405.15_GRCh38_no_alt_analysis_set.fasta.fai
 	"""
 }
 
 process get_dbSNP {
 	publishDir "${params.outdir}/reference"
-	container 'melnel000/hg38_resources'
-
+	
 	output:
-	file "dbsnp_138.hg19.vcf" into dbsnp
-	file "dbsnp_138.hg19.vcf.idx" into dbsnp_idx
+	file "Homo_sapiens_assembly38.dbsnp138.vcf" into dbsnp
+	file "Homo_sapiens_assembly38.dbsnp138.vcf.tbi" into dbsnp_idx
 
 	"""
-	gunzip -dc /data/dbsnp_138.hg19.vcf.gz > dbsnp_138.hg19.vcf
-	gunzip -dc /data/dbsnp_138.hg19.vcf.idx.gz > dbsnp_138.hg19.vcf.idx
+	gunzip -dc /hg38_ref/Homo_sapiens_assembly38.dbsnp138.vcf.gz > Homo_sapiens_assembly38.dbsnp138.vcf
+	gunzip -dc /hg38_ref/Homo_sapiens_assembly38.dbsnp138.vcf.tbi.gz > Homo_sapiens_assembly38.dbsnp138.vcf.tbi
 	"""
 }
 
 process get_golden_indel {
 	publishDir "${params.outdir}/reference"
-	container 'oliversi/hg19'
-
+	
 	output:
 	file "Mills_and_1000G_gold_standard.indels.hg19.sites.vcf" into golden_indel
 	file "Mills_and_1000G_gold_standard.indels.hg19.sites.vcf.idx" into golden_indel_idx
@@ -84,8 +76,7 @@ process get_golden_indel {
 
 process get_hapmap {
 	publishDir "${params.outdir}/reference"
-	container 'oliversi/hg19'
-
+	
 	output:
 	file "hapmap_3.3.hg19.sites.vcf" into hapmap
 	file "hapmap_3.3.hg19.sites.vcf.idx" into hapmap_idx
@@ -98,8 +89,7 @@ process get_hapmap {
 
 process get_omni {
 	publishDir "${params.outdir}/reference"
-	container 'oliversi/hg19'
-
+	
 	output:
 	file "1000G_omni2.5.hg19.sites.vcf" into omni
 	file "1000G_omni2.5.hg19.sites.vcf.idx" into omni_idx
@@ -112,8 +102,7 @@ process get_omni {
 
 process get_phase1_SNPs {
 	publishDir "${params.outdir}/reference"
-	container 'oliversi/hg19'
-
+	
 	output:
 	file "1000G_phase1.snps.high_confidence.hg19.sites.vcf" into phase1_snps
 	file "1000G_phase1.snps.high_confidence.hg19.sites.vcf.idx" into phase1_snps_idx
@@ -126,17 +115,16 @@ process get_phase1_SNPs {
 
 process get_BWA_index {
 	publishDir "${params.outdir}/reference"
-	container 'oliversi/hg19'
-
+	
 	output:
 	set "ucsc.hg19.fasta.amb", "ucsc.hg19.fasta.ann", "ucsc.hg19.fasta.bwt", "ucsc.hg19.fasta.pac", "ucsc.hg19.fasta.sa" into bwa_index
 
 	"""
-	gunzip -dc /data/ucsc.hg19.fasta.amb.gz > ucsc.hg19.fasta.amb
-	gunzip -dc /data/ucsc.hg19.fasta.ann.gz > ucsc.hg19.fasta.ann
-	gunzip -dc /data/ucsc.hg19.fasta.bwt.gz > ucsc.hg19.fasta.bwt
-	gunzip -dc /data/ucsc.hg19.fasta.pac.gz > ucsc.hg19.fasta.pac
-	gunzip -dc /data/ucsc.hg19.fasta.sa.gz > ucsc.hg19.fasta.sa
+	gunzip -dc /hg38_ref/GCA_000001405.15_GRCh38_no_alt_analysis_set.fna.amb.gz > GCA_000001405.15_GRCh38_no_alt_analysis_set.fasta.amb
+	gunzip -dc /hg38_ref/GCA_000001405.15_GRCh38_no_alt_analysis_set.fna.ann.gz > GCA_000001405.15_GRCh38_no_alt_analysis_set.fasta.ann
+	gunzip -dc /hg38_ref/GCA_000001405.15_GRCh38_no_alt_analysis_set.fna.bwt.gz > GCA_000001405.15_GRCh38_no_alt_analysis_set.fasta.bwt
+	gunzip -dc /hg38_ref/GCA_000001405.15_GRCh38_no_alt_analysis_set.fna.pac.gz > GCA_000001405.15_GRCh38_no_alt_analysis_set.fasta.pac
+	gunzip -dc /hg38_ref/GCA_000001405.15_GRCh38_no_alt_analysis_set.fna.sa.gz > GCA_000001405.15_GRCh38_no_alt_analysis_set.fasta.sa
 	"""
 }
 
